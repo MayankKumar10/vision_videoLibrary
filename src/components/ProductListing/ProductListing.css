@@ -1,0 +1,55 @@
+.product-list-container {
+	margin-top: 0.5rem;
+}
+
+.filter-container {
+	background-color: var(--color-pureWhite);
+}
+
+.filter-categories {
+	padding: 1em;
+}
+
+.text-large {
+	font-size: 1.4em;
+	--color-text: #0000008a;
+	font-family: "Segoe UI", Arial, sans-serif;
+	font-weight: 400;
+	margin: 10px 0;
+}
+
+.input-radio {
+	width: 1.3rem;
+	height: 1.3rem;
+}
+
+.filter-input-range,
+.filter-input-range:active {
+	border: none;
+}
+
+.input-range-container {
+	width: 4rem;
+	text-align: center;
+}
+
+/*-------------------------Product page(card)---------------*/
+.icon-wishlist .icon-wishlist:hover {
+	background-color: var(--color-pureWhite);
+}
+/* .icon-wishlist:hover {
+	color: var(--Mak-colors-red-500);
+} */
+
+.buy-btn {
+	background-color: var(--color-warning);
+	color: var(--color-pureWhite);
+	width: 18rem;
+	height: 4rem;
+	border-radius: 0.5rem;
+	font-size: 1.5rem;
+}
+
+.card-brand-text {
+	width: 22rem;
+}
