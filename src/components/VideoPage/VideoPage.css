@@ -1,0 +1,120 @@
+.icon-inner-txt {
+  font-size: 0.8em;
+}
+
+.card-text-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.card-container1 {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 0.5em;
+  cursor: pointer;
+  border: var(--border-grey);
+  background-color: var(--color-pureWhite);
+}
+
+.card-footer-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.reactPlayer {
+  width: 70rem;
+  height: 35rem;
+}
+
+.card-wishlist-icons {
+  top: 1em;
+  font-size: 0.8em;
+  font-weight: 400;
+  border: none;
+  color: var(--color-text);
+  background-color: transparent;
+}
+
+.card-description {
+  width: 68rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.MdIcons {
+  font-size: 1.3rem;
+}
+
+.imgcard {
+  width: 15em;
+  height: 12em;
+  border-radius: 1em 1em 0 0;
+}
+
+.cardBadge::before {
+  left: -1.6rem;
+  border-right: 24px solid var(--color-primary);
+  border-left: 0;
+}
+
+.cardBadge::after {
+  left: -1.5rem;
+}
+
+.img-card-offer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  height: 14rem;
+}
+
+.videoDetailContainer {
+  display: flex;
+  width: 9rem;
+  font-size: 1.2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.videoIconsContainer {
+  width: 35rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+hr {
+  width: 100%;
+}
+.videoSubscribeContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 68rem;
+}
+
+.channelDetail {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 11rem;
+  align-items: center;
+}
+.channelSubscriber {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.channelSubscribe {
+  width: 12rem;
+  display: flex;
+}
