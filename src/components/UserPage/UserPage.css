@@ -1,0 +1,44 @@
+.user-main-container {
+	height: 100%;
+}
+
+.user-page-container {
+	margin-left: 1rem;
+	border-radius: 1rem;
+}
+
+.flex-align-center {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.user-form-input {
+	padding: 0.5rem;
+}
+
+.pad-normal-top {
+	padding-top: 1rem;
+}
+
+.padding-large-top {
+	padding-top: 2rem;
+}
+
+.padding-normal-top {
+	padding-top: 1rem;
+}
+
+.user-container-avatar {
+	border-radius: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.avatar-img-container {
+	width: 3rem;
+	height: 3rem;
+}
+
+.avatar-img {
+	width: 100%;
+	border-radius: 50%;
+}

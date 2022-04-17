@@ -1,29 +1,29 @@
 import React from "react";
-import {emptyWatch_later} from "../../assets/images";
-import {UseWatch} from "../../context/WatchProvider";
+import {emptyWishlist} from "../../assets/images";
+import {UseLiked} from "../../context/LikedProvider";
 import "../../styles/root.css";
 import {NormalCard} from "../Cards/NormalCard";
 
-export function WatchLater() {
-  const {WatchProducts, removeFromWatch} = UseWatch();
+export function LikedList() {
+  const {LikedProducts, removeFromLiked} = UseLiked();
 
   return (
     <>
       <div className="user-main-container flex-space-evenly-start">
         <main className="product-container margin-normal-left border-radius-normal box-shadow col-8">
           <p className="wishlist-text padding-normal">
-            Watch Videos ({WatchProducts.length})
+            Liked Videos ({LikedProducts.length})
           </p>
 
-          {WatchProducts.length < 1 ? (
+          {LikedProducts.length < 1 ? (
             <>
               <img
-                src={emptyWatch_later}
-                alt="emptyWatch_later"
+                src={emptyWishlist}
+                alt="emptyWishlist"
               />
             </>
           ) : (
-            WatchProducts.map((product) => {
+            LikedProducts.map((product) => {
               return (
                 <NormalCard key={product.id} {...product} />
               );
@@ -35,4 +35,4 @@ export function WatchLater() {
   );
 }
 
-export default WatchLater;
+export default LikedList;
