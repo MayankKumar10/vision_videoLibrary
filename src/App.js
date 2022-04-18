@@ -17,8 +17,6 @@ import {
 } from "./components/index";
 import Mockman from "mockman-js";
 import {FilterProvider} from "./context/FilterProvider";
-import {RequireAuth} from "./components/UserAuth/Auth/RequireAuth";
-
 function App() {
   return (
     <div className="App">
@@ -54,9 +52,7 @@ function App() {
         <Route
           path="playlist"
           element={
-            <RequireAuth>
-              <Playlist />
-            </RequireAuth>
+          <Playlist />  
           }
         />
         <Route path="mockAPI" element={<Mockman />} />

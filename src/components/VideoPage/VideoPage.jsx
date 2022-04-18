@@ -10,7 +10,7 @@ import {
 } from "react-icons/md";
 import {FaShare} from "react-icons/fa";
 import {WishlistButton} from "../WishList/WishlistButton.styled";
-import {PlaylistProducts} from "../../context/PlaylistProvider";
+import {UsePlaylist} from "../../context/PlaylistProvider";
 import {UseLiked} from "../../context/LikedProvider";
 import {UseWatch} from "../../context/WatchProvider";
 import {WatchLaterButton} from "../WatchLater/WatchLaterButton.styled";
@@ -41,11 +41,11 @@ export const VideoPage = () => {
     likes,
   } = video;
 
-  // const {
-  //   PlaylistVideos,
-  //   addToPlaylist,
-  //   removeFromPlaylist,
-  // } = PlaylistProducts();
+  const {
+    PlaylistVideos,
+    addToPlaylist,
+    removeFromPlaylist,
+  } = UsePlaylist();
 
   const {LikedProducts, addToLiked, removeFromLiked} =
     UseLiked();
@@ -71,7 +71,7 @@ export const VideoPage = () => {
       }
     }, [products, setIsInList, title]);
 
-  //EffectFunc(PlaylistVideos, setIsInPlaylist);
+  EffectFunc(PlaylistVideos, setIsInPlaylist);
   EffectFunc(WatchProducts, setIsInWatch);
   EffectFunc(LikedProducts, setIsInLiked);
 
@@ -101,12 +101,12 @@ export const VideoPage = () => {
     }
   };
 
-  // const handlePlaylist = () =>
-  //   handleCliked(
-  //     isInPlaylist,
-  //     addToPlaylist,
-  //     removeFromPlaylist
-  //   );
+  const handlePlaylist = () =>
+    handleCliked(
+      isInPlaylist,
+      addToPlaylist,
+      removeFromPlaylist
+    );
 
   const handleLiked = () =>
     handleCliked(isInLiked, addToLiked, removeFromLiked);
@@ -159,7 +159,7 @@ export const VideoPage = () => {
               <>
                 <WishlistButton
                   className="material-icons-text card-wishlist-icons buttonHoverShadow AvatarImage AvatarIcons flex-row-center"
-                  //  onClick={handlePlaylist}
+                  onClick={handlePlaylist}
                   isInState={isInPlaylist}
                 >
                   <MdPlaylistAdd size="25" />

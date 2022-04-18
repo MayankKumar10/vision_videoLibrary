@@ -1,3 +1,11 @@
+.viewlist-card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
 .view-card {
   display: flex;
   flex-direction: column;
@@ -10,4 +18,12 @@
   flex-direction: column;
   width: 90%;
   padding: 1rem;
+}
+
+.viewlist-container-horizontal {
+  height: 13rem;
+  padding: 1em;
+  border-radius: 0.5em;
+  justify-content: flex-start;
+  background-color: var(--color-pureWhite);
 }

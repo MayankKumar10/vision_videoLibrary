@@ -1,53 +1,28 @@
 const PlaylistInitialState = {
-  playlists: [],
-  activePlaylistId: null,
-  modal: false,
-  video: null,
-  stateCreateBtn: false,
+  total: 0,
+  PlaylistVideos: [],
 };
 
-const updatePlaylists = (state, playlist) => {
-  if (state.length !== 0) {
-    const index = state.findIndex(
-      (obj) => obj.id === playlist.id
-    );
-    state[index] = playlist;
-    return [...state];
-  } else {
-    return [playlist];
-  }
-};
 
 const PlaylistReducer = (state, {type, payload}) => {
   switch (type) {
-    case "SET_PLAYLISTS":
-      return {...state, playlists: payload};
-    case "SET_PLAYLIST":
+    case "ADD_TO_PLAYLIST":
+      console.log("ADD_TO_PLAYLIST", payload.PlaylistVideos);
       return {
         ...state,
-        playlists: updatePlaylists(
-          [...state.playlists],
-          payload
-        ),
+        PlaylistVideos: payload.PlaylistVideos,
       };
-    case "SET_SELECTED_PLAYLIST":
-      return {...state, selectedPlaylistId: payload};
-    case "SET_MODAL":
-      return {...state, modal: payload};
-    case "SET_VIDEO":
-      return {...state, video: payload};
-    case "SET_STATE_CREATE_BTN":
-      return {...state, stateCreateBtn: payload};
-    case "RESET":
+    case "REMOVE_FROM_PLAYLIST":
+      console.log(
+        "REMOVE_FROM_PLAYLIST",
+        payload.PlaylistVideos
+      );
       return {
         ...state,
-        stateCreateBtn: false,
-        video: null,
-        modal: false,
+        PlaylistVideos: payload.PlaylistVideos,
       };
-
     default:
-      return state;
+      return {...state};
   }
 };
 

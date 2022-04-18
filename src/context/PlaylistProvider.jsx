@@ -16,15 +16,45 @@ function PlaylistProvider({children}) {
     PlaylistInitialState
   );
 
+  const addToPlaylist = (product) => {
+    const updatePlaylist =
+      state.PlaylistVideos.concat(product);
+    dispatch({
+      type: "ADD_TO_PLAYLIST",
+      payload: {
+        PlaylistVideos: updatePlaylist,
+      },
+    });
+  };
+
+  const removeFromPlaylist = (product) => {
+    const updatePlaylist = state.PlaylistVideos.filter(
+      (currentVideos) => currentVideos.name !== product.name
+    );
+    dispatch({
+      type: "REMOVE_FROM_PLAYLIST",
+      payload: {
+        PlaylistVideos: updatePlaylist,
+      },
+    });
+  };
+
+  const value = {
+    total: state.total,
+    PlaylistVideos: state.PlaylistVideos,
+    addToPlaylist,
+    removeFromPlaylist,
+  };
+
   return (
     <>
-      <PlaylistContext.Provider value={""}>
+      <PlaylistContext.Provider value={value}>
         {children}
       </PlaylistContext.Provider>
     </>
   );
 }
 
-const PlaylistProducts = () => useContext(PlaylistContext);
+const UsePlaylist = () => useContext(PlaylistContext);
 
-export {PlaylistProducts, PlaylistProvider};
+export {UsePlaylist, PlaylistProvider};

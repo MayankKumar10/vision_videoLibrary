@@ -20,10 +20,10 @@ export function ViewListCard({props}) {
       {products.map((product) => {
         return (
           <div
-            className="wishlist-card-container"
+            className="viewlist-card-container"
             key={product.id}
           >
-            <div className="card-container-horizontal flex-column-start">
+            <div className="viewlist-container-horizontal flex-column-start">
               <section className="view-card flex-column-center">
                 <section className="flex-row-start">
                   <ReactPlayer
@@ -45,7 +45,6 @@ export function ViewListCard({props}) {
               </span>
             </span>
 
-            <span></span>
             <button
               className="delete-icon 
     buttonHoverShadow card-wishlist-icons"

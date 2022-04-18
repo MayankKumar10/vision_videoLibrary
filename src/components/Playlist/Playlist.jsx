@@ -1,11 +1,11 @@
-import React, {useEffect} from "react";
-import {PlaylistProducts} from "../../context/PlaylistProvider";
+import React from "react";
+import {UsePlaylist} from "../../context/PlaylistProvider";
 import {NormalCard, ViewListCard} from "..";
 import {empty_playlist} from "../../assets/images";
 
 export function Cart() {
   const {PlaylistVideos, removeFromPlaylist} =
-    PlaylistProducts();
+    UsePlaylist();
   const value = {
     products: PlaylistVideos,
     removeFromCard: removeFromPlaylist,
@@ -28,11 +28,7 @@ export function Cart() {
           ) : (
             PlaylistVideos.map((product) => {
               return (
-                //<NormalCard key={product.id} {...product} />
-                <ViewListCard
-                  key={product.id}
-                  props={value}
-                />
+                <NormalCard key={product.id} {...product} />
               );
             })
           )}
