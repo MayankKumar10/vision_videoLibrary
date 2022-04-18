@@ -1,0 +1,69 @@
+.icon-inner-txt {
+  font-size: 0.8em;
+}
+
+.card-container {
+  display: flex;
+  align-items: center;
+  width: 26rem;
+  height: 17rem;
+  justify-content: space-between;
+  flex-direction: column;
+  border-radius: 0.5em;
+  cursor: pointer;
+  border: var(--border-grey);
+  background-color: var(--color-pureWhite);
+}
+
+.AvatarImage {
+  border-radius: 50%;
+  width: 3rem;
+  background-color: transparent;
+}
+
+.card-container-horizontal {
+  display: flex;
+  padding: 1em;
+  flex-direction: row;
+  border-radius: 0.5em;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  background-color: var(--color-pureWhite);
+}
+
+.card-wishlist-icons {
+  top: 1em;
+  font-size: 0.8em;
+  font-weight: 400;
+  border: none;
+  color: var(--color-text);
+  background-color: transparent;
+}
+
+.card-footer {
+  font-size: 1.3em;
+}
+
+.imgcard {
+  width: 15em;
+  height: 12em;
+  border-radius: 1em 1em 0 0;
+}
+
+.cardBadge::before {
+  left: -1.6rem;
+  border-right: 24px solid var(--color-primary);
+  border-left: 0;
+}
+
+.cardBadge::after {
+  left: -1.5rem;
+}
+
+.img-card-offer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  height: 14rem;
+}
