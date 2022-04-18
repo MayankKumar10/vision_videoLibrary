@@ -1,0 +1,224 @@
+@import url("https://vision-ui-lib.netlify.app/styles/root.css");
+@import url("./index.css");
+@import url("../components/Cards/Cards.css");
+@import url("../components/VideoPage/VideoPage.css");
+@import url("../components/Cart/Cart.css");
+@import url("../components/Filter/Filter.css");
+@import url("../components/Footer/Footer.css");
+@import url("../components/Header/Header.css");
+@import url("../components/UserAuth/Login.css");
+@import url("../components/ProductListing/ProductListing.css");
+@import url("../components/UserAuth/Signup.css");
+@import url("../components/UserPage/UserPage.css");
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  height: initial;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+:root {
+  --color-text: #0000008a;
+  --border-grey: 1px solid #dbdbdb;
+  --color-warning: #fb641b;
+  --color-container-bg: #f7f7f7;
+  --color-sm-card-shadow: rgba(50, 50, 93, 0.25) 0px 50px
+      100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.button-normal {
+  color: var(--color-pureWhite);
+  font-weight: 400;
+  background-color: var(--color-primary);
+  margin: 0.875em;
+  font-size: 0.875em;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  padding: 0.2em 0em;
+  border: 1px solid var(--border-grey);
+}
+
+.container-bg {
+  background-color: var(--color-container-bg);
+}
+
+.primary-btn {
+  color: var(--color-primary);
+}
+
+/* .flex-column-center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+} */
+
+.iframe-header-container {
+  height: 8em;
+  overflow: hidden;
+}
+
+.iframe-main-container {
+  height: 105em;
+  overflow: hidden;
+}
+
+.iframe-footer-container {
+  height: 18em;
+  overflow: hidden;
+}
+
+.wishlist-text {
+  height: 3em;
+}
+
+hr {
+  border: 0;
+  border-top: 2px solid #eee;
+  margin: 1.5em 0;
+}
+
+.icons-btn-hover:hover {
+  background: var(--color-primary);
+  color: var(--color-pureWhite);
+  border-radius: 0.5rem;
+  border: none;
+}
+
+/*-------------------Padding-------------------*/
+.padding-normal {
+  padding: 1em;
+}
+
+.padding-normal-left0 {
+  padding: 1em 1em 1em 0;
+}
+
+.padding-normal-left0 {
+  padding: 1em 0;
+}
+
+.padding-small-left1 {
+  padding: 0 0 0 1em;
+}
+
+.padding-lg {
+  padding: 2rem;
+}
+
+.padding-top-small {
+  padding: 0.5rem 1rem;
+}
+
+.padding-top-normal1 {
+  padding-top: 1rem;
+}
+
+.padding-top-lg1 {
+  padding-top: 2rem;
+}
+
+/*-------------------Margin-------------------*/
+
+.margin-normal-left {
+  margin-left: 1em;
+}
+
+.margin-normal-top {
+  margin-top: 1em;
+}
+
+.margin-normal-left {
+  margin-left: 1em;
+}
+
+.margin-large-left {
+  margin-left: 2.5rem;
+}
+
+/*-------------------flex-------------------*/
+
+.flex {
+  display: flex;
+}
+
+.flex-row-spc-btw {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.flex-space-between {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-row-start {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.flex-column-start {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.flex-space-evenly {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  align-items: center;
+}
+
+.flex-space-evenly-start {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  align-items: start;
+}
+
+/*-------------------Grid-------------------*/
+
+.mid-container {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  padding: 1em;
+}
+
+.grid-rows-start {
+  display: grid;
+  grid-template-rows: 1fr;
+  padding: 1em;
+}
+
+.wishlist-text {
+  font-size: 1.25em;
+  font-weight: 500;
+}
+
+.create-btn {
+  font-size: 1rem;
+}
+
+.headerContainerMain,
+.iframe-header-container {
+}
+
+.iframeHeaderContainer {
+  position: fixed;
+}
