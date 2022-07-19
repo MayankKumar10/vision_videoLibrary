@@ -1,0 +1,67 @@
+.header-center {
+  width: 98%;
+  margin-left: 1rem;
+  border-radius: 0 0 1rem 1rem;
+}
+
+.Header-TextSize {
+  font-size: 1.225em;
+}
+
+.search-container,
+.search-container:focus {
+  border: none;
+  outline: none;
+}
+
+.headerContainerMain {
+  background-color: var(--color-pureWhite);
+}
+
+.search-container-main {
+  background-color: var(--color-pureWhite);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8em;
+  margin: 0.5em;
+  width: 15em;
+  height: 1.5em;
+  border-radius: 1.5em;
+  border: 1px solid #dbdbdb;
+}
+
+.button-transparent {
+  border: none;
+  background: transparent;
+}
+
+.transparent-bg {
+  background-color: transparent;
+  border: none;
+}
+
+.material-icons-text {
+  font-size: 1.25em;
+}
+
+.iconsContainer {
+  width: 20rem;
+}
+
+.outer {
+  position: relative;
+  width: 1.5rem;
+  background-color: coral;
+  border-radius: 50%;
+  font-size: 0.7rem;
+}
+
+.iconNotification {
+  display: flex;
+}
+
+:root {
+  --Mak-color-bg-footer: #232f3e;
+  --mak-color-txt-footer: #ddd;
+}
