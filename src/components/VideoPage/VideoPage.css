@@ -4,9 +4,11 @@
 
 .card-text-container {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: center;
 }
 
 .card-container1 {
@@ -41,6 +43,14 @@
   background-color: transparent;
 }
 
+.card-txt-length {
+  width: 20rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .card-description {
   width: 68rem;
   display: flex;
@@ -48,6 +58,7 @@
   align-items: center;
   justify-content: space-between;
 }
+
 
 .MdIcons {
   font-size: 1.3rem;
@@ -86,9 +97,14 @@
 }
 
 .videoIconsContainer {
-  width: 35rem;
+  /* width: 35rem; */
   display: flex;
   justify-content: space-between;
+}
+
+.video-icon-cont{
+  display: flex;
+  padding: 0 1rem 0 0
 }
 
 hr {
@@ -117,4 +133,9 @@ hr {
 .channelSubscribe {
   width: 12rem;
   display: flex;
+}
+
+.playlist-card-img {
+  position: relative;
+  min-width: inherit;
 }

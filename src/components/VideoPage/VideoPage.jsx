@@ -1,28 +1,64 @@
-import React, {useState, useEffect} from "react";
-import {Link, useParams} from "react-router-dom";
-import {AllVideos} from "../../context/ContextProducts";
+import React, {useState} from "react";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {
   MdThumbUp,
-  MdThumbDown,
   MdOutlineWatchLater,
   MdPlaylistAdd,
   MdNotifications,
 } from "react-icons/md";
-import {FaShare} from "react-icons/fa";
 import {WishlistButton} from "../WishList/WishlistButton.styled";
-import {PlaylistProducts} from "../../context/CartProvider";
-import {UseLiked} from "../../context/LikedProvider";
+import {WatchLaterButton} from "../WatchLater/WatchLaterButton.styled";
+import { useAuth, useUserData, useVideoData } from "../../context";
+import { actionTypes } from "../../constant";
+import { checkInPlaylist } from "../../filterFunctions";
+import { PlaylistHook } from "../../hooks";
+import { addToLikesAPI, addToWatchLaterAPI, removeLikesAPI, removeWatchLaterAPI } from "../../APIs";
+import { Modal } from "../Modal";
 
 export const VideoPage = () => {
+  const {auth:{isAuth}} = useAuth();
+  const navigate = useNavigate();
   const {videoId} = useParams();
-  const {productState} = AllVideos();
-  const {data: videos, loading} = productState;
+  const {userData:{likesPlaylist, watchLaterPlaylist, notes }} = useUserData();
+  const { SET_LIKES, SET_WATCHLATER, SET_NOTES } = actionTypes;
+  const {videoDataState: {data}} = useVideoData()
+  const video = data.find((video) => video.id === videoId)
 
-  const getVideosData = (arry, id) => {
-    return arry.find((item) => item.id === id);
-  };
+  const videoNotes = notes?.filter((note)=> note._id === video._id)[0]?. vidNotes;
+  const[opened, setOpened] = useState(false)
+  const isInPlaylistLiked = checkInPlaylist(video, likesPlaylist);
+  const isInPlaylistWatchLater = checkInPlaylist(video, watchLaterPlaylist);
+  
+   
+    const [addToLikeCall, addingToLike ] = PlaylistHook(
+      addToLikesAPI,
+      video,
+      SET_LIKES,
+      "Added To Likes"
+    );
+  
+    const [removeLikeCall, removingLike ] = PlaylistHook(
+      removeLikesAPI,
+      video,
+      SET_LIKES,
+      "Remove from Likes"
+    );
+  
+    const [addToWatchLaterCall, addingWatchLater ] = PlaylistHook(
+      addToWatchLaterAPI,
+      video,
+      SET_WATCHLATER,
+      "Added To WatchLater"
+    );
+  
+  
+    const [removeWatchLaterCall, removingWatchLater ] = PlaylistHook(
+      removeWatchLaterAPI,
+      video,
+      SET_WATCHLATER,
+      "Removed From WatchLater"
+    );
 
-  const video = getVideosData(videos, videoId);
   const {
     id,
     title,
@@ -39,89 +75,19 @@ export const VideoPage = () => {
     likes,
   } = video;
 
-  const {
-    PlaylistVideos,
-    addToPlaylist,
-    removeFromPlaylist,
-  } = PlaylistProducts();
+  const likeHandler = () =>{
+    isInPlaylistLiked 
+    ? removeLikeCall() 
+    : addToLikeCall();
+  }
+  
+  const watchLaterHandler = () =>{
+    isInPlaylistWatchLater 
+    ? removeWatchLaterCall() 
+    : addToWatchLaterCall();
+  }
 
-  const {LikedProducts, addToLiked, removeFromLiked} =
-    UseLiked();
-
-  const [isInPlaylist, setIsInPlaylist] = useState(false);
-
-  const [isInLiked, setIsInLiked] = useState(false);
-
-  useEffect(() => {
-    const productIsInPlaylist = PlaylistVideos.find(
-      (product) => product.title === title
-    );
-
-    const productIsInWishlist = LikedProducts.find(
-      (product) => product.title === title
-    );
-
-    if (productIsInWishlist) {
-      setIsInLiked(true);
-    } else {
-      setIsInLiked(false);
-    }
-
-    if (productIsInPlaylist) {
-      setIsInPlaylist(true);
-    } else {
-      setIsInPlaylist(false);
-    }
-  }, [LikedProducts, PlaylistVideos, title]);
-
-  const handleClick = () => {
-    const product = {
-      id,
-      title,
-      url,
-      thumbnail,
-      channel,
-      profile,
-      category,
-      views,
-      uploadTime,
-      playbackTime,
-      likes,
-    };
-
-    if (isInPlaylist) {
-      removeFromPlaylist(product);
-      console.log("remove", isInPlaylist);
-    } else {
-      addToPlaylist(product);
-      console.log("add", isInPlaylist);
-    }
-  };
-
-  const handleLiked = () => {
-    const product = {
-      id,
-      title,
-      url,
-      thumbnail,
-      channel,
-      profile,
-      category,
-      views,
-      uploadTime,
-      playbackTime,
-      likes,
-    };
-
-    if (isInLiked) {
-      removeFromLiked(product);
-      console.log("remove Liked", isInLiked);
-    } else {
-      console.log("Add Liked", isInLiked);
-      addToLiked(product);
-    }
-  };
-
+  
   return (
     <>
       <div className="card-container1" key={id}>
@@ -145,58 +111,51 @@ export const VideoPage = () => {
               </ul>
             </span>
             <span className="videoIconsContainer">
+              <div className='video-icon-cont'
+               onClick={isAuth ? likeHandler : navigate('/login')}>
               <WishlistButton
                 className="material-icons-text card-wishlist-icons buttonHoverShadow AvatarImage AvatarIcons flex-row-center"
-                onClick={handleLiked}
-                isInLiked={isInLiked}
+                isInState={isInPlaylistLiked}
               >
                 <MdThumbUp size="25" />
               </WishlistButton>
               <h6>{likes}</h6>
-
-              <WishlistButton
-                className="material-icons-text card-wishlist-icons buttonHoverShadow AvatarImage AvatarIcons flex-row-center"
-                onClick=""
-                isInLiked={isInLiked}
-              >
-                <MdThumbDown size="25" />
-              </WishlistButton>
-
-              <h6>DISLIKE</h6>
-
-              <>
+              </div>
+              
+              <div className='video-icon-cont' onClick={setOpened}>
                 <WishlistButton
                   className="material-icons-text card-wishlist-icons buttonHoverShadow AvatarImage AvatarIcons flex-row-center"
-                  onClick={handleClick}
-                  isInLiked={isInLiked}
+                  isInState={''}
                 >
                   <MdPlaylistAdd size="25" />
                 </WishlistButton>
                 <h6>SAVE</h6>
-              </>
+              </div>
 
-              <>
-                <WishlistButton
+              <div className='video-icon-cont' 
+              onClick={isAuth ? watchLaterHandler : navigate('/login')}>
+                <WatchLaterButton
                   className="material-icons-text card-wishlist-icons buttonHoverShadow AvatarImage AvatarIcons flex-row-center"
-                  onClick=""
-                  isInLiked={isInLiked}
+                  isInWatch={isInPlaylistWatchLater}
                 >
                   <MdOutlineWatchLater size="25" />
-                </WishlistButton>
+                </WatchLaterButton>
                 <h6>WATCH LATER</h6>
-              </>
+              </div>
 
-              <>
+              {/* <>
                 <WishlistButton
                   className="material-icons-text card-wishlist-icons buttonHoverShadow AvatarImage AvatarIcons flex-row-center"
                   onClick=""
-                  isInLiked={isInLiked}
+                  isInLiked={""}
                 >
                   <FaShare size="25" />
                 </WishlistButton>
                 <h6>SHARE</h6>
-              </>
+              </> */}
+               <Modal key={id} val={opened} setOpened={setOpened} video={video} />
             </span>
+           
           </span>
           <hr />
           <span className="videoSubscribeContainer flex">
@@ -232,7 +191,7 @@ export const VideoPage = () => {
                 <WishlistButton
                   className="material-icons-text card-wishlist-icons buttonHoverShadow AvatarImage AvatarIcons flex-row-center"
                   onClick=""
-                  isInLiked={isInLiked}
+                  isInLiked={""}
                 >
                   <MdNotifications size="25" />
                 </WishlistButton>

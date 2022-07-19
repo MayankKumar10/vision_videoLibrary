@@ -1,15 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/root.css";
-import {
-  MdCategory,
-  MdFavorite,
-  MdShoppingCart,
-  MdPerson,
-} from "react-icons/md";
 import {Link} from "react-router-dom";
-import reactDom from "react-dom";
+import { useUserData } from "../../context/UserDataProvider";
+import { useAuth } from "../../context/AuthProvider";
+import { actionTypes } from "../../constant/actionTypes";
+import { useDebounce } from "../../filterFunctions";
+import {useNavigate} from 'react-router-dom';
+import { useVideoData } from "../../context";
 
 export function Header() {
+
+  const {videoDispatch} = useVideoData();
+  const {SEARCH,RESET} = actionTypes;
+  const navigate = useNavigate();
+  const [searchInputState, setSearchInputState] = useState();
+  const debounceSearchInput = useDebounce(searchInputState, 500);
+  const {userDataDispatch} = useUserData();
+  const {
+		auth,
+		setAuth
+	} = useAuth();
+  
+  // useEffect(()=>{
+  //   userDataDispatch({
+  //     type: SEARCH,
+  //     payload: {searchInput: searchInputState}
+  //   })
+  // }, [debounceSearchInput]);
+
+  const logoutHandler = () =>{
+		localStorage.clear();
+		setAuth({
+			token:'',
+			isAuth: false,
+			firstName: '',
+			lastName: '',
+			userEmail: '',
+		});
+		userDataDispatch({type: RESET})
+		navigate('/');
+	}
+
   return (
     <>
       <div className="ComponentMainBoxOne img-responsive ">
@@ -33,71 +64,55 @@ export function Header() {
               <input
                 className="boxShadow search-container"
                 type="search"
-                name=""
                 placeholder="search"
-                id=""
+                value={searchInputState}
+                onChange={(e)=>{
+                  setSearchInputState(e.target.value)
+                }}
               />
-              <button className="material-icons button-transparent primary-btn">
+              <button className="material-icons button-transparent primary-btn"
+              onClick={(e)=>{
+                e.preventDefault();
+                setSearchInputState('');
+                videoDispatch({
+                  type: SEARCH,
+                  payload: {searchInput:''}
+                })
+              }}
+              >
                 search
               </button>
             </form>
 
-            <div className="iconsContainer flex-evenly">
-              <Link
-                className="headerAnchorTag flex-column-center icons-btn-hover buttonHoverShadow"
-                to="/"
-              >
-                <MdCategory size="25" />
-                <span className="icon-inner-txt">Home</span>
-              </Link>
-
-              <div className="iconNotification ">
-                <Link
-                  className="headerAnchorTag flex-column-center icons-btn-hover buttonHoverShadow"
-                  to="/Likedlist"
+            { auth.isAuth ? 
+                (
+                <button
+                  id="myBtn"
+                  className="header-btn transparent-bg button-normal ButtonDomContainer icons-btn-hover buttonHoverShadow"
                 >
-                  <div className="outer">11</div>
-                  <MdFavorite size="25" />
-
-                  <span className="icon-inner-txt">
-                    Like
-                  </span>
-                </Link>
-              </div>
-
-              <Link
-                className="headerAnchorTag flex-column-center icons-btn-hover buttonHoverShadow"
-                to="/Cart"
-              >
-                <MdShoppingCart size="25" />
-                <span className="icon-inner-txt">Cart</span>
-              </Link>
-
-              <Link
-                className="headerAnchorTag flex-column-center icons-btn-hover buttonHoverShadow"
-                to="/user-page"
-              >
-                <MdPerson size="25" />
-                <span className="icon-inner-txt">
-                  Account
+                <span className="button-inner-txt" 
+                onClick={logoutHandler} >
+                  Logout
                 </span>
-              </Link>
-            </div>
-
-            <button
-              id="myBtn"
-              className="header-btn transparent-bg button-normal ButtonDomContainer icons-btn-hover buttonHoverShadow"
-            >
-              <Link
+                </button>
+                )
+                :
+              (
+                <button
+                id="myBtn"
+                className="header-btn transparent-bg button-normal ButtonDomContainer icons-btn-hover buttonHoverShadow"
+              >
+              <a
                 className="headerAnchorTag flex-column-center"
-                to="./login"
-                target="iframe-main-container"
+                href="./Login"
               >
                 <span className="button-inner-txt">
                   Login
                 </span>
-              </Link>
-            </button>
+              </a>
+              </button>
+              )
+              }
           </div>
         </header>
       </div>

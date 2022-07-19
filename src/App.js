@@ -3,19 +3,20 @@ import "./App.css";
 import {
   Header,
   Filter,
-  Cart,
+  Playlist,
+  SinglePlaylist,
   ProductListing,
   VideoPage,
   Login,
   Signup,
   ForgotPassword,
-  UserPage,
   LikedList,
-  NotFound,
   HistoryPage,
+  WatchLater,
+  ErrorPage,
 } from "./components/index";
 import Mockman from "mockman-js";
-import {FilterProvider} from "./context/FilterProvider";
+import {RequireAuth} from "./components/UserAuth/Auth/RequireAuth";
 
 function App() {
   return (
@@ -25,13 +26,11 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            <FilterProvider>
+          element={        
               <ProductListing />
-            </FilterProvider>
-          }
+              }
         />
-        <Route path="/:videoId" element={<VideoPage />} />
+
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route
@@ -39,15 +38,17 @@ function App() {
           element={<ForgotPassword />}
         />
 
-        <Route path="Likedlist" element={<LikedList />} />
-        <Route path="user-page" element={<UserPage />} />
-        <Route
-          path="history_page"
-          element={<HistoryPage />}
-        />
-        <Route path="cart" element={<Cart />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<RequireAuth />}>
+          <Route path="/videos/:videoId"element={<VideoPage />}/>
+          <Route path="likedlist" element={<LikedList />} />
+          <Route path="watchLater" element={<WatchLater />}/>
+          <Route path="history_page" element={<HistoryPage />}/>
+          <Route path="playlist" element={<Playlist />} />
+          <Route path='/playlist/:playlistId' element={<SinglePlaylist />} />
+        </Route>
+
         <Route path="mockAPI" element={<Mockman />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
   );

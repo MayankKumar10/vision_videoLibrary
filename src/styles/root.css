@@ -2,7 +2,7 @@
 @import url("./index.css");
 @import url("../components/Cards/Cards.css");
 @import url("../components/VideoPage/VideoPage.css");
-@import url("../components/Cart/Cart.css");
+@import url("../components/Playlist/Playlist.css");
 @import url("../components/Filter/Filter.css");
 @import url("../components/Footer/Footer.css");
 @import url("../components/Header/Header.css");
@@ -10,6 +10,10 @@
 @import url("../components/ProductListing/ProductListing.css");
 @import url("../components/UserAuth/Signup.css");
 @import url("../components/UserPage/UserPage.css");
+@import url("../components/Cards/ViewListCard.css");
+@import url("../components/Modal/Modal.css");
+
+
 
 *,
 *::before,
@@ -45,6 +49,27 @@
   border: 1px solid var(--border-grey);
 }
 
+.btn-chip{
+  font-weight: 400;
+  color: var(--color-primary);
+  background-color: var(--color-pureWhite);
+  margin: 0.875em;
+  font-size: 0.875em;
+  cursor: pointer;
+  border-radius: 1.5rem;
+  padding: 0.2em 0em;
+  border: 1px solid var(--color-primary);
+}
+
+.btn-chip:hover,
+.btn-chip-active{
+  color: var(--color-pureWhite);
+  background-color: var(--color-primary);
+  transition:smooth;
+}
+
+
+
 .container-bg {
   background-color: var(--color-container-bg);
 }
@@ -52,13 +77,6 @@
 .primary-btn {
   color: var(--color-primary);
 }
-
-/* .flex-column-center{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-} */
 
 .iframe-header-container {
   height: 8em;

@@ -8,17 +8,12 @@ import { v4 as uuid } from "uuid";
 export const categories = [
 	{
 		_id: uuid(),
-		categoryName: "All",
-		description: "All",
-	},
-	{
-		_id: uuid(),
 		categoryName: "Laptop",
 		description: "Laptop",
 	},
 	{
 		_id: uuid(),
-		categoryName: "Gaming_Laptops",
+		categoryName: "Gaming Laptops",
 		description: "Phones",
 	},
 	{

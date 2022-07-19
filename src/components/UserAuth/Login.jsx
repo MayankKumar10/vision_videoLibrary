@@ -1,9 +1,53 @@
-import React from "react";
+import React, {useState} from "react";
 import "../../styles/root.css";
 import {steve} from "../../assets/images";
-import {Link} from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import axios from "axios";
+import { loginService } from "../../APIs";
+import { useAuth } from "../../context";
 
 export function Login() {
+  const initialState = {
+    email: "",
+    password: "",
+  };
+  const [userDetails, setUserDetails] = useState(initialState);
+  const [state, setState] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const {setAuth} = useAuth();
+
+  const from = location?.state?.from.pathname || "/";
+
+  const loginHandler = async (e, userDetails) => {
+    setUserDetails({ ...userDetails });
+    e.preventDefault();
+    try {
+      const res = await loginService(userDetails);
+      if (res.status === 200) {
+        //toast.success("Successfully logged in!");
+        localStorage.setItem("vision_token", res.data.encodedToken);
+        localStorage.setItem("isAuth", true);
+        
+        
+        setAuth({
+          vision_token: res.data.encodedToken,
+          isAuth: true,
+        });
+        navigate(from, {replace: true});
+      }
+    } catch (err) {
+      // toast.error(err.response.data.errors[0]);
+      console.log('login',err);
+    }
+  };
+
+  
   return (
     <>
       <div
@@ -14,7 +58,12 @@ export function Login() {
           className="formContainerMain inputDomContainer AlertInfo input-flex inputError box-shadow"
           action="submit"
           autocomplete="on"
+          onSubmit={(e)=>loginHandler(e, userDetails)}
         >
+          {
+            (console.log('email',userDetails.email),
+            console.log('password', userDetails.password))
+          }
           <div className="formContainer input-flex flex">
             <div className="login-avatar">
               <img
@@ -36,6 +85,13 @@ export function Login() {
                 id=""
                 pattern="[A-Za-z].{5,}"
                 placeholder="User Name"
+                value={userDetails.email}
+                onChange={(e) =>
+                  setUserDetails({
+                    ...userDetails,
+                    email: e.target.value,
+                  })
+                }
                 required
               />
               <span className="validity"></span>
@@ -51,6 +107,13 @@ export function Login() {
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
                 placeholder="Confirm Password"
+                value={userDetails.password}
+                onChange={(e) =>
+                  setUserDetails({
+                    ...userDetails,
+                    password: e.target.value,
+                  })
+                }
               />
               <span className="validity"></span>
             </div>

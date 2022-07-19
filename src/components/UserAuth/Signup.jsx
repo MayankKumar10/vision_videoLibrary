@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/root.css";
 import {
 	google,
 	github,
 } from "../../assets/images";
+import { useAuth } from "../../context";
+
 
 export function Signup() {
+
+	const initialState = {
+		userName :'',
+		email: '',
+		password: '',
+	}
+
+	const[userDetails, setUserDetails] = useState(initialState);
+	const{setAuth} = useAuth();
+
+
+
 	return (
 		<>
 			<div className="inputDomMainContainer flex-evenly">

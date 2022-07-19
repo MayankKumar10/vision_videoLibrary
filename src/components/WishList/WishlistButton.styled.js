@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const WishlistButton = styled.button`
   color: ${(props) =>
-    props.isInLiked
+    props.isInState
       ? "var(--color-primary)"
       : "var(--color-text)"}; ;
 `;

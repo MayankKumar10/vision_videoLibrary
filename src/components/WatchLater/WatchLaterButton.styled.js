@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const WishlistButton = styled.button`
+export const WatchLaterButton = styled.button`
   color: ${(props) =>
-    props.isInLiked
+    props.isInWatch
       ? "var(--color-primary)"
       : "var(--color-text)"}; ;
 `;

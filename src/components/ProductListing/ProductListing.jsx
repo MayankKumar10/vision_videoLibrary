@@ -1,121 +1,88 @@
-import React, {useState, useEffect} from "react";
-import {UseFilter} from "../../context/FilterProvider";
+import React from "react";
 import "../../styles/root.css";
-import {
-  Rating,
-  Sort,
-  Price,
-  Category,
-} from "../../utils/filter";
 import {NormalCard} from "../Cards/NormalCard";
-import {AllVideos} from "../../context/ContextProducts";
 import {Loader} from "../Loader/Loader";
-import {NavLink} from "react-router-dom";
-import {UseHistory} from "../../context/HistoryProvider";
+import {useNavigate} from "react-router-dom";
+import { useVideoData } from "../../context";
+import { actionTypes, constants } from "../../constant";
+import {getSearchedVideos} from '../../filterFunctions'
+import { sortByDate } from "../../filterFunctions";
 
 export function ProductListing() {
-  const {productState} = AllVideos();
-  const {data: videos, loading} = productState;
+  
+  const{videoDataState:{
+    data,
+    categories,
+    selectedCategory,
+    sortBy,
+    searchText,
+  }, 
+  videoDispatch,
+  videoLoader,
+  videoError,
+} = useVideoData(); 
 
-  const {
-    id,
-    title,
-    url,
-    thumbnail,
-    channel,
-    profile,
-    description,
-    subscribers,
-    views,
-    uploadTime,
-    playbackTime,
-    likes,
-  } = videos;
+const {FILTER, SORT_VIDEOS} = actionTypes;
+const {NEWEST, OLDEST} = constants;
+const navigate = useNavigate();
+videoError && navigate('/error');
 
-  const {state, dispatch} = UseFilter();
-  const {category} = state;
-  const {All, Laptop, Gaming_Laptops, CPU, Phones} =
-    category;
+  let videoList = [...data];
 
-  const categoryFilter = Category(
-    videos,
-    All,
-    Laptop,
-    Gaming_Laptops,
-    CPU,
-    Phones
-  );
+  if(searchText) {
+    videoList = getSearchedVideos(videoList, searchText);
+  }
 
+  const filteredVideos = selectedCategory ? 
+  videoList.filter((item)=> item.category === selectedCategory)
+  : videoList;
+
+  const videoFinalList = sortByDate(filteredVideos, sortBy)
+
+  const videoDispatchHandler = (val) =>{
+    videoDispatch({
+      type: FILTER,
+      payload: { category: val }
+    })
+  }
+
+  
   return (
     <>
-      <div class="product-list-container user-main-container flex-space-evenly-start container-bg">
+      <div class="product-list-container user-main-container container-bg">
+        <section className="category-container">
+          <button
+             className={`videoCategory btn-chip  ButtonDomContainer buttonHoverShadow ${selectedCategory ? '' : 'btn-chip-active'}`}
+            onClick={(e) =>
+             videoDispatchHandler('')
+            }
+          >
+            All
+          </button>
+
+          {categories.map((category)=>(
+            <button
+            className={`videoCategory btn-chip  ButtonDomContainer buttonHoverShadow ${selectedCategory === category.categoryName ? 'btn-chip-active': ''}`}
+            onClick={(e) =>
+              videoDispatchHandler(category.categoryName)}
+              key={category.id}
+          >
+            {category.categoryName}
+          </button>
+          ))}
+
+          
+        </section>
         <main class="product-container mid-container container-bg ">
-          {console.log("categoryFilter", categoryFilter)}
-
-          <section>
-            <button
-              className="videoCategory button-normal ButtonDomContainer buttonHoverShadow"
-              onClick={(e) =>
-                dispatch({
-                  type: "ALL",
-                })
-              }
-            >
-              All
-            </button>
-            <button
-              className="videoCategory button-normal ButtonDomContainer buttonHoverShadow"
-              onClick={(e) =>
-                dispatch({
-                  type: "LAPTOP",
-                })
-              }
-            >
-              Laptop
-            </button>
-            <button
-              className="videoCategory button-normal ButtonDomContainer buttonHoverShadow"
-              onClick={(e) =>
-                dispatch({
-                  type: "GAMING_LAPTOPS",
-                })
-              }
-            >
-              Gaming Laptop
-            </button>
-            <button
-              className="videoCategory button-normal ButtonDomContainer buttonHoverShadow"
-              onClick={(e) =>
-                dispatch({
-                  type: "CPU",
-                })
-              }
-            >
-              CPU
-            </button>
-
-            <button
-              className="videoCategory button-normal ButtonDomContainer buttonHoverShadow"
-              onClick={(e) =>
-                dispatch({
-                  type: "PHONES",
-                })
-              }
-            >
-              Phones
-            </button>
-          </section>
-
-          {loading ? (
+          {videoLoader ? (
             <Loader type="spinningBubbles" color="#fff" />
           ) : (
-            categoryFilter.length > 0 &&
-            categoryFilter.map((product) => (
-              <div key={product.id} product={product}>
+            videoFinalList.length > 0 &&
+            videoFinalList?.map((video) => (
+              <div key={video.id} video={video}>
                 <NormalCard
-                  key={product.id}
-                  product={product}
-                  {...product}
+                  key={video.id}
+                  video={video}
                 />
               </div>
             ))

@@ -5,13 +5,16 @@ export {NormalCard} from "./Cards/NormalCard";
 export {ServiceCard} from "./Cards/ServiceCard";
 export {BestSellingCard} from "./Cards/BestSellingCard";
 export {VideoPage} from "./VideoPage/VideoPage";
-export {default as Cart} from "./Cart/Cart";
+export {ViewListCard} from "./Cards/ViewListCard";
+export {SinglePlaylist} from './Playlist/SinglePlaylist'
+export {Playlist} from "./Playlist/Playlist";
+export {PlaylistCard} from './Cards/PlaylistCard';
 export {default as ProductListing} from "./ProductListing/ProductListing";
 export {default as Login} from "./UserAuth/Login";
 export {default as Signup} from "./UserAuth/Signup";
 export {default as ForgotPassword} from "./UserAuth/ForgotPassword";
 export {default as UserPage} from "./UserPage/UserPage";
 export {default as LikedList} from "./WishList/LikedList";
+export {default as WatchLater} from "./WatchLater/WatchLater";
 export {default as HistoryPage} from "./History/HistoryPage";
-
-export {NotFound} from "./NotFound/NotFound";
+export {ErrorPage} from "./ErrorPage/ErrorPage";

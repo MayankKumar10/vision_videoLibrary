@@ -4,10 +4,8 @@ import "./index.css";
 import App from "./App";
 import {BrowserRouter} from "react-router-dom";
 import {makeServer} from "./server";
-import {ContextProducts} from "./context/ContextProducts";
-import {PlaylistProvider} from "./context/CartProvider";
-import {LikedProvider} from "./context/LikedProvider";
-import {HistoryProvider} from "./context/HistoryProvider";
+import {AuthProvider} from "./context/AuthProvider";
+import { UserDataProvider, VideoDataProvider, } from "./context";
 
 // Call make Server
 makeServer();
@@ -15,15 +13,13 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ContextProducts>
-        <PlaylistProvider>
-          <LikedProvider>
-            <HistoryProvider>
-              <App />
-            </HistoryProvider>
-          </LikedProvider>
-        </PlaylistProvider>
-      </ContextProducts>
+      <AuthProvider>
+        <UserDataProvider>
+          <VideoDataProvider>
+        <App />
+        </VideoDataProvider>
+        </UserDataProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
