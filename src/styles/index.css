@@ -1,0 +1,49 @@
+.main-container {
+	margin-top: 7rem;
+	margin-left: 1em;
+	border-radius: 1em;
+}
+
+.videoContainer {
+	width: 98%;
+	height: 70%;
+	margin-left: 1rem;
+}
+
+.video-inner-container {
+	position: absolute;
+	padding: 2em;
+	left: 2em;
+	top: 10rem;
+	color: var(--color-pureWhite);
+}
+
+.imageContainer {
+	width: 98%;
+	height: 30em;
+}
+
+.big-container {
+}
+
+.border-radius-normal {
+	border-radius: 1em;
+}
+
+.wishlist-card-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: flex-start;
+}
+
+.delete-icon {
+	width: 2.3rem;
+	height: 2.3rem;
+	border-radius: 50%;
+}
+
+.delete-icon:hover {
+	color: var(--color-warning);
+}

@@ -1,0 +1,12 @@
+.filter-container {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  max-height: 80%;
+  height: calc(88vh - 1rem);
+}
+
+.videoLikeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
