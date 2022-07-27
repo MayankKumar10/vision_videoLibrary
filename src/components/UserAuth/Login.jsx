@@ -34,7 +34,6 @@ export function Login() {
         localStorage.setItem("vision_token", res.data.encodedToken);
         localStorage.setItem("isAuth", true);
         
-        
         setAuth({
           vision_token: res.data.encodedToken,
           isAuth: true,
@@ -149,6 +148,15 @@ export function Login() {
                 </Link>
               </div>
             </div>
+            <div className="AlertDomMainContainer" >
+              <input
+                type="button"
+                className="ButtonDomContainer descriptionOne primary-button flex-evenly buttonHoverShadow col-12"
+                value="Login with TestCredentials"
+                onClick={(e)=>loginHandler(e, {email:'adarshbalika@gmail.com', password:'adarshBalika123'})}
+              />
+              </div>
+
           </div>
         </form>
       </div>

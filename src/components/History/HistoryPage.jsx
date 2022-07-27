@@ -29,7 +29,7 @@ export function HistoryPage() {
 
           {history.length < 1 ? (
             <>
-              <img src={emptyHistory} alt="emptyHistory" />
+              <img className="container-img" src={emptyHistory} alt="emptyHistory" />
             </>
           ) : (
             history.map((video) => {

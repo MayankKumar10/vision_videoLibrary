@@ -24,20 +24,15 @@ function App() {
       <Header />
       <Filter />
       <Routes>
-        <Route
-          path="/"
-          element={        
-              <ProductListing />
-              }
-        />
-
+        
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route
           path="forgot_password"
           element={<ForgotPassword />}
         />
-
+        
+        <Route path="/" element={<ProductListing />}/>
         <Route path="/" element={<RequireAuth />}>
           <Route path="/videos/:videoId"element={<VideoPage />}/>
           <Route path="likedlist" element={<LikedList />} />

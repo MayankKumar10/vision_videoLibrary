@@ -28,6 +28,7 @@ export function Header() {
   //   })
   // }, [debounceSearchInput]);
 
+  
   const logoutHandler = () =>{
 		localStorage.clear();
 		setAuth({
@@ -40,6 +41,7 @@ export function Header() {
 		userDataDispatch({type: RESET})
 		navigate('/');
 	}
+
 
   return (
     <>
@@ -86,6 +88,7 @@ export function Header() {
 
             { auth.isAuth ? 
                 (
+                <Link to='/'>
                 <button
                   id="myBtn"
                   className="header-btn transparent-bg button-normal ButtonDomContainer icons-btn-hover buttonHoverShadow"
@@ -95,6 +98,7 @@ export function Header() {
                   Logout
                 </span>
                 </button>
+                </Link>
                 )
                 :
               (
@@ -102,14 +106,14 @@ export function Header() {
                 id="myBtn"
                 className="header-btn transparent-bg button-normal ButtonDomContainer icons-btn-hover buttonHoverShadow"
               >
-              <a
+              <Link
                 className="headerAnchorTag flex-column-center"
-                href="./Login"
+                to="./Login"
               >
                 <span className="button-inner-txt">
                   Login
                 </span>
-              </a>
+              </Link>
               </button>
               )
               }

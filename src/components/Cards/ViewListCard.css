@@ -10,4 +10,10 @@
   flex-direction: column;
   width: 90%;
   padding: 1rem;
+  align-items: center;
+}
+
+
+.container-img{
+  width: 50%;
 }

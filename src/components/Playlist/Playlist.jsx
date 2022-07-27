@@ -17,7 +17,7 @@ export function Playlist() {
           </p>
           {playlists.length < 1 ? (
             <>
-              <img
+              <img 
                 src={empty_playlist}
                 alt="empty_playlist"
               />
